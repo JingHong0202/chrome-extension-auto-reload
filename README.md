@@ -29,7 +29,7 @@ Currently disabling and enabling extensions again causes any open inspection win
 
 ```
 npm install
-npm install -g browserify
+npm run build
 ```
 
 `app/js` is created from `src/js` by:
