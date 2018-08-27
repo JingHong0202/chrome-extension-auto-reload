@@ -1,28 +1,35 @@
 ## What?
-Reloads all unpacked extensions whenever a file is changed in an extension that is currently under development.
-You'll never need to go to `chrome://extensions` and smash reload again.
+Reloads all unpacked extensions on receive socket event `file.change` from `http://localhost:8890`
 
 ## How
-Extension tries to connect to socket.io server on `http://localhost:8890` (yes, that port is random) and waits for `file.change` events to flow in.
-When an event is incoming, the extension reloads `chrome://extensions` automatically, which causes all unpacked extensions to reload and update (e.g. content scripts).
-If there is no open tab, currently opened at `chrome://extensions`, the extension creates and reloads one.
+Extension tries to connect to socket.io server on `http://localhost:8890` and waits for `file.change` event to flow in.
+When an event is incoming, the extension get all extensions in development mode and reload them one by one.
 
 An example on how to send file change events to the extension can be found here:
-[robin-drexler/chrome-extension-auto-reload-watcher](https://github.com/robin-drexler/chrome-extension-auto-reload-watcher)
+[robin-drexler/chrome-extension-auto-reload-watcher](https://github.com/robin-drexler/chrome-extension-auto-reload-watcher) or here:
+     
+    (function(console) {
+        'use strict'; 
+        var gulp = require('gulp');;
+        var watch = require('gulp-watch');
+        var io = require('socket.io');
+ 
+        gulp.task('chrome-watch', function () {
+            var WEB_SOCKET_PORT = 8890;
+ 
+            io = io.listen(WEB_SOCKET_PORT);
+ 
+            watch('**/*.*', function(file) {
+                console.log('change detected', file.relative);
+                io.emit('file.change', {});
+            });
+        });
+    })(global.console);
+    
 
 ## Installation
 
-Download [from the webstore](https://chrome.google.com/webstore/detail/chrome-unpacked-extension/fddfkmklefkhanofhlohnkemejcbamln) or:
-
- - Clone the repo
- - load `app` folder as unpacked extension in Chrome
- - start developing an unpacked extension
-  - don't forget to emit events when a file changes 
-
-## Why...
-
-...reloading the entire tab instead of just using the extensions management api too reload/re-enable extensions?
-Currently disabling and enabling extensions again causes any open inspection window (console log etc.) to close, which I found to be too annoying.
+Just download from the [webstore](https://chrome.google.com/webstore/detail/chrome-unpacked-extension/jfjjbihghhhohnahailbplkciefnaffg)
 
 
 ## Development
@@ -32,8 +39,8 @@ npm install
 npm run build
 ```
 
-`app/js` is created from `src/js` by:
 
-```
-browserify src/js/background.js -o app/js/background.js
-```
+## Author
+
+Originally idea forked from `https://github.com/robin-drexler/chrome-extension-auto-reload` and reworked by me :)
+

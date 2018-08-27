@@ -2,7 +2,8 @@
   "name": "Dev Extension Auto Reload",
   "version": "1",
   "icons": {
-    "256": "/img/icons/icon_256.png"
+    "256": "/img/icons/icon-256.png",
+    "128": "/img/icons/icon-128.png"
   },
   "description": "Reloads all unpacked extensions on socket event",
   "permissions": [
