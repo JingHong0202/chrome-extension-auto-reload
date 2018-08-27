@@ -13,7 +13,7 @@
 
         chrome.management.getAll(function(extensions){
             for(let extension of extensions){
-                if (extension.installType === "development" && extension.id !== chrome.runtime.id) {
+                if (extension.enabled && extension.installType === "development" && extension.id !== chrome.runtime.id) {
                     chrome.management.setEnabled(extension.id, false, function(){
                         chrome.management.setEnabled(extension.id, true);
                         console.log('Reloaded', extension)

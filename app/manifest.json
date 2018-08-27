@@ -1,6 +1,6 @@
 {
   "name": "Dev Extension Auto Reload",
-  "version": "1",
+  "version": "1.0.1",
   "icons": {
     "256": "/img/icons/icon-256.png",
     "128": "/img/icons/icon-128.png"
