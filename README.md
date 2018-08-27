@@ -29,7 +29,9 @@ An example on how to send file change events to the extension can be found here:
 
 ## Installation
 
-Just download from the [webstore](https://chrome.google.com/webstore/detail/chrome-unpacked-extension/jfjjbihghhhohnahailbplkciefnaffg)
+Just download from the [webstore](https://chrome.google.com/webstore/detail/dev-extension-auto-reload/jfjjbihghhhohnahailbplkciefnaffg)
+
+https://chrome.google.com/webstore/detail/dev-extension-auto-reload/jfjjbihghhhohnahailbplkciefnaffg
 
 
 ## Development
