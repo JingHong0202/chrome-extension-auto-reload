@@ -23,7 +23,7 @@
         });
     }
 
-    socket.on('file.change', function () {
+    socket.on('change', function () {
         console.log('received ping');
         reloadExtensions();
     });

@@ -2,15 +2,13 @@
   "name": "chrome-extension-auto-reload",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "browserify src/js/background.js -o app/js/background.js"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
     "browserify": "^16.2.2",
-    "socket.io": "^2.1.1"
+    "socket.io-client": "^4.6.1"
   }
 }
