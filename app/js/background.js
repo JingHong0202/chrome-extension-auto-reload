@@ -6932,37 +6932,36 @@ function hasBinary(obj, toJSON) {
 exports.hasBinary = hasBinary;
 
 },{}],37:[function(require,module,exports){
-(function (console) {
-    "use strict";
+;(function (console) {
+  'use strict'
 
-    console.log('Hello, Dev Extension Auto Reload')
+  console.log('Hello, Dev Extension Auto Reload')
 
-    const SOCKET_IO_PORT = '8890';
+  const SOCKET_IO_PORT = '8890'
 
-    var io = require('socket.io-client');
-    var socket = io('http://localhost:' + SOCKET_IO_PORT);
+  var io = require('socket.io-client')
+  var socket = io('http://localhost:' + SOCKET_IO_PORT)
 
-    function reloadExtensions() {
-        console.log('reloading extensions');
+  function reloadExtensions() {
+    console.log('reloading extensions')
 
-        chrome.management.getAll(function(extensions){
-            for(let extension of extensions){
-                if (extension.enabled && extension.installType === "development" && extension.id !== chrome.runtime.id) {
-                    chrome.management.setEnabled(extension.id, false, function(){
-                        chrome.management.setEnabled(extension.id, true);
-                        console.log('Reloaded', extension)
-                    });
-                }
-            }
-        });
-    }
+    chrome.management.getAll(function (extensions) {
+      for (let extension of extensions) {
+        if (
+          extension.enabled &&
+          extension.installType === 'development' &&
+          extension.id !== chrome.runtime.id
+        ) {
+          chrome.runtime.sendMessage(extension.id, { type: 'reload' })
+        }
+      }
+    })
+  }
 
-    socket.on('change', function () {
-        console.log('received ping');
-        reloadExtensions();
-    });
-})(window.console);
-
-
+  socket.on('change', function () {
+    console.log('received ping')
+    reloadExtensions()
+  })
+})(window.console)
 
 },{"socket.io-client":29}]},{},[37]);
